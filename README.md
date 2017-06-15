@@ -25,4 +25,4 @@ From the calendar project folder, now you can run npm install to make sure all t
 
 Then run npm start and it should start the server on port 3000 of the localhost
 
-(authentication was done using only username, since we couldn't ge that working with the passport module)
+(authentication was done using only username to test the frontend, since we couldn't ge that working with the passport module)
