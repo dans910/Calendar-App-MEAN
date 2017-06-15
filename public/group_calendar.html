@@ -1,0 +1,76 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>Calendar</title>
+          <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0-rc.2/angular.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript" src="javascripts/picker.js"></script>
+    <script type="text/javascript" src="javascripts/db.js"></script>
+    <script type="text/javascript" src="javascripts/calendarApp.js"></script>
+    <style>
+    .themecolor{
+        color: #EE6E73;
+    }    
+    .cardimg{
+        width: 400px;
+        height: auto;
+    }
+    </style>
+    </head>
+    <body ng-app="calendarApp" ng-controller="groupController">
+        <nav>
+            <div class="nav-wrapper">
+            <a href="#" onClick="return false;" class="brand-logo center">Group Calendar</a>
+            </div>
+        </nav>    
+        <div class="container">
+            <h4 class="header">Users in Group</h4>
+            <ul class="collection" >
+                <li class="collection-item" ng-repeat="user in users">{{user.username}}</li>
+            </ul>
+        </div>
+
+        <div class="row">
+        <div class="container" >
+            <br><br>
+            <h5 class="themecolor">Pick a Date</h5>
+            <input type="date" class="datepicker" ng-model="today">
+            <br>
+            <!--Today's date Events-->
+            <h5 class="themecolor">Today's Events</h5>
+            <div id="todayEvents" class="col s12">
+                <div id="eventtemplate" class="col s4 m4" ng-repeat="event in todaysEvents">
+                    <span id="day" class="themecolor" >{{today}}</span>
+                    <div class="card">
+                        <div class="card-image ">
+                            <img class="activator cardimg" src="images/event.png">
+                        
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title activator grey-text text-darken-4">{{event.name}}</span>
+                        </div>
+                        <div class="card-reveal">
+                            <span id="des" class="card-title grey-text text-darken-4">{{event.name}}<i class="material-icons right">close</i></span>
+                            <p>{{event.description}}</p>
+                            <a style="position: absolute; bottom: 10px; right: 10px;" data-target='addModal' class="edit btn-floating btn-large waves-effect waves-light"><i class="material-icons">edit</i></a>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+            <br><!--this is diapyed if there are no events-->
+            <p style="display:block;" id="noEvents">No Events Planned...</p>
+        </div>
+        </div>
+
+    <script type="text/javascript" src="javascripts/calendar.js"></script>
+
+    </body>
+</html>

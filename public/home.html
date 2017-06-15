@@ -1,0 +1,87 @@
+<br><br>
+<div class="center container" >
+     <div ng-show="auth">
+       <h3>Hello, {{c_user}}</h3>
+       <button type="button" class="btn waves-light waves-effect" ng-click="UserCalendar()">My Calender</button>
+     </div>
+     <div ng-hide="auth">
+        <form id="userNameSignIn" ng-submit="login('signin')"> 
+
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="username" type="text" ng-model="username">
+                <label >Username</label>
+              </div>
+            </div>
+
+            <p ng-show="invalid" class="center ng-show" style="color: red">Invalid User</p>
+            <button id="signInBtn" class="btn waves-effect waves-light" type="submit" name="action">Sign In
+              <i class="material-icons right">send</i>
+            </button>
+        </form>
+        <form ng-submit="login('register')"> 
+
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="username" type="text" ng-model="username">
+                <label >Username</label>
+              </div>
+            </div>
+
+            <p ng-show="invalid" class="center ng-show" style="color: red">Invalid User</p>
+            <button id="signInBtn" class="btn waves-effect waves-light" type="submit" name="action">Register
+              <i class="material-icons right">add</i>
+            </button>
+        </form>
+      </div>
+  <!--<a id="startSignIn" class="waves-effect waves-light btn" data-target="signInModal">Sign In</a>-->
+</div>
+  <br>
+  <div class="container">
+      <h3 class="header">Calendar Project</h3>
+      <p>This project allows users to keep track of events in their calendar as well as join groups with their own calendar.
+        </p>
+      <hr>
+      <h4 class="header">General</h4>
+      <p>This project was built with the MEAN Stack(MongoDB, ExpressJS, AngularJS, NodeJS)</p>
+      <hr>  
+      <h4 class="header">How To Use</h4>
+        <ul>
+          <li>Sign in or create an account</li>
+          <li>Once in your homepage, you can add or edit your calender events</li>
+          <li>You must choose the date before adding, or else it will default to today's date</li>
+          <li>You can then join a group to share a calendar with other users</li>
+        </ul>
+  </div>
+
+
+  <!-- Modal Structure -->
+    <!--<div id="signInModal" class="modal">
+     <form id="signIn" ng-submit="login()"> 
+      <div class="modal-content">
+        <h4>Sign In</h4>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="username" type="text">
+            <label >Username</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="password" type="password" class="validate">
+            <label for="password">Password</label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button id="signInBtn" class="btn waves-effect waves-light" type="submit" name="action">Sign In
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+     </form>
+    </div>-->
+
+   <!--<script type="text/javascript" src="javascripts/login.js"></script>-->

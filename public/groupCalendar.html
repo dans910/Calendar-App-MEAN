@@ -1,0 +1,89 @@
+<div class="container">
+    <h4 class="header">Users in Group</h4>
+    <ul class="collection" >
+        <li class="collection-item" ng-repeat="user in users">{{user}}</li>
+    </ul>
+</div>
+
+<div class="row">
+<div class="container" >
+    <br><br>
+    <h5 class="themecolor">Pick a Date</h5>
+    <input type="date" class="datepicker" ng-model="today">
+    <br>
+    <!--Today's date Events-->
+    <h5 class="themecolor">Today's Events</h5>
+    <div id="todayEvents" class="col s12">
+        <div id="eventtemplate" class="col s4 m4" ng-repeat="event in todaysEvents">
+            <span id="day" class="themecolor" >{{today}}</span>
+            <div class="card">
+                <div class="card-image ">
+                    <img class="activator cardimg" src="images/event.png">
+                
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">{{event.name}}</span>
+                </div>
+                <div class="card-reveal">
+                    <span id="des" class="card-title grey-text text-darken-4">{{event.name}}<i class="material-icons right">close</i></span>
+                    <p>{{event.description}}</p>
+                    <!--no more edit-->
+                    <!--<a style="position: absolute; bottom: 10px; right: 10px;" data-target='addModal' class="edit btn-floating btn-large waves-effect waves-light"><i class="material-icons">edit</i></a>-->
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+    <br><!--this is diapyed if there are no events-->
+    <p style="display:none;" id="noEvents">No Events Planned...</p>
+</div>
+</div>
+
+        <div class="fixed-action-btn">
+            <a id="addBtn" onClick='return false;' data-target='addModal' class="themecolor btn-floating btn-large waves-effect waves-light">
+                <i class="themecolor large material-icons">add</i>
+            </a>
+        </div>
+<!-- Modal Structure -->
+<div id="addModal" class="modal">
+    <form id="event" ng-submit="addEvent()"> 
+    <div class="modal-content">
+    <h4 id="modalTitle">Add Event</h4>
+
+    <div id="eventdiv" style="display:none;">
+        <div class="row">
+        <div class="input-field col s12">
+            <input id="eventTitle" type="text" ng-model="eventTitle">
+            <label>Event</label>
+        </div>
+        </div>
+
+    </div>
+    <div id="groupdiv" style="display:none;">
+        <div class="row">
+        <div class="input-field col s12">
+            <input id="groupName" type="text" >
+            <label>Group Name</label>
+        </div>
+        </div>
+    </div>
+    
+    <div class="row">
+    <div class="input-field col s12">
+        <textarea id="description" class="materialize-textarea" length="200" ng-model="eventDes"></textarea>
+        <label>Description</label>
+    </div>
+    </div>
+
+    </div>
+    <p ng-show="invalidEvent" class="center ng-show" style="color: red">Invalid Event</p>
+    <div class="modal-footer">
+    <button id="submitEvent" class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <i class="material-icons right">send</i>
+    </button>
+    </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="javascripts/calendar.js"></script>

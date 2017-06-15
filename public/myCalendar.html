@@ -1,0 +1,184 @@
+
+
+<div class="row">
+    <!--Tabs-->
+    <div class="col s12">
+        <ul class="tabs">
+            <li class="tab col s5 offset-s1"><a id="home" class="active" onClick="gohome(); return false;"href="#homeContent"><i style="position: absolute;top: 10px;" class="material-icons">home</i></a></li>
+            <li class="tab col s5"><a id="group" onClick="gogroup(); return false;" href="#groupContent"><i style="position: absolute;top: 10px;" class="material-icons">group</i></a></li>
+        </ul>
+    </div>
+    <!--HTML for user homepage-->
+    <div id="homeContent" class="center">
+        <div class="container">
+            <br><br>
+            <h5 class="themecolor">Pick a Date</h5>
+            <input type="date" class="datepicker" ng-model="today">
+            <br>
+            <!--Today's date Events-->
+            <h5 class="themecolor">Today's Events</h5>
+            <div id="todayEvents" class="col s12" >
+                <div id="eventtemplate" class="col s4 m4" ng-repeat="event in todaysEvents">
+                    <span id="day" class="themecolor" >{{today}}</span>
+                    <div class="card">
+                        <div class="card-image ">
+                            <img class="activator cardimg" src="images/event.png">
+                        
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title activator grey-text text-darken-4">{{event.name}}</span>
+                        </div>
+                        <div class="card-reveal">
+                            <span id="des" class="card-title grey-text text-darken-4">{{event.name}}<i class="material-icons right">close</i></span>
+                            <p>{{event.description}}</p>
+                            <!--no more edit-->
+                            <!--<a style="position: absolute; bottom: 10px; right: 10px;" data-target='addModal' class="edit btn-floating btn-large waves-effect waves-light"><i class="material-icons">edit</i></a>-->
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+            <br><!--this is diapyed if there are no events-->
+            <p style="display:block;" id="noEvents">No Events Planned...</p>
+            
+
+        </div>   
+        <div class="fixed-action-btn">
+            <a id="addBtn" onClick='return false;' data-target='addModal' class="themecolor btn-floating btn-large waves-effect waves-light">
+                <i class="themecolor large material-icons">add</i>
+            </a>
+        </div>
+         
+    </div>
+    <!--List of groups and joining groups-->
+    <div id="groupContent" class="col s12" style="display:none;">
+        <div class="center container">
+        <ul id="groupList">
+            <li id="grouptemplate" class=" center row" ng-repeat="group in groups"  >
+                <div>
+                <div class="card horizontal">
+                    <div class="card-image">
+                        <img src="images/calendar.png">
+                    </div>
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <h4>{{group.UserGroup[0].name}}</h4>
+                            <ul class="center"><strong>Members:</strong>
+                                <li ng-repeat="member in group.UserGroup[0].members">{{member}}</li>
+                            </ul>
+                            <p>{{group.group_id}}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#" onClick="return false;" ng-click="goToCalendar(group.UserGroup[0].calendar_id)">Go to calendar</a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </li>
+        </ul>
+
+        <!--if have not joined a Group show this-->
+        <p id="noGroups" ng-show="noGroups" class="center ng-show">No Groups Joined...</p>
+        <br>
+        <div class="center">
+            <a id="createGroupbtn" data-target='createGroup' class="waves-effect waves-light btn" data-target="signInModal">Create or Join Group</a>
+        </div>
+        <br>
+
+        </div>        
+    </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="addModal" class="modal">
+    <form id="event" ng-submit="addEvent()"> 
+    <div class="modal-content">
+    <h4 id="modalTitle">Add Event</h4>
+
+    <div id="eventdiv" style="display:none;">
+        <div class="row">
+        <div class="input-field col s12">
+            <input id="eventTitle" type="text" ng-model="eventTitle">
+            <label>Event</label>
+        </div>
+        </div>
+
+    </div>
+    <div id="groupdiv" style="display:none;">
+        <div class="row">
+        <div class="input-field col s12">
+            <input id="groupName" type="text" >
+            <label>Group Name</label>
+        </div>
+        </div>
+    </div>
+    
+    <div class="row">
+    <div class="input-field col s12">
+        <textarea id="description" class="materialize-textarea" length="200" ng-model="eventDes"></textarea>
+        <label>Description</label>
+    </div>
+    </div>
+
+    </div>
+    <p ng-show="invalidEvent" class="center ng-show" style="color: red">Invalid Event</p>
+    <div class="modal-footer">
+    <button id="submitEvent" class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <i class="material-icons right">send</i>
+    </button>
+    </div>
+    </form>
+</div>
+<!-- group Modal Structure -->
+<div id="createGroup" class="modal">
+    <form id="event" ng-submit="createGroup()"> 
+    <div class="modal-content">
+    <h4 id="modalTitle">Create Group</h4>
+
+    <div id="groupdiv">
+        <div class="row">
+        <div class="input-field col s12">
+            <input id="groupName" type="text" ng-model="createGroupName">
+            <label>Group Name</label>
+        </div>
+        </div>
+    </div>
+
+    </div>
+    <p ng-show="invalidGroup" class="center ng-show" style="color: red">Invalid Group</p>
+    <div class="modal-footer">
+    <button id="submitGroup" class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <i class="material-icons right">send</i>
+    </button>
+    </div>
+    </form>
+</div>
+
+
+<script type="text/javascript" src="javascripts/calendar.js"></script>
+
+            <!--<h5 class="themecolor">Week's Events</h5>
+            <div id="weekEvents" class="col s12">
+                <div id="eventtemplate" class="col s4 m4">
+                    <span id="day" class="themecolor">Day</span>
+                    <div class="card">
+                        <div class="card-image ">
+                            <img class="activator cardimg" src="images/event.png">
+                        
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title activator grey-text text-darken-4">Event Title</span>
+                        </div>
+                        <div class="card-reveal">
+                            <span id="des" class="card-title grey-text text-darken-4">Event Title<i class="material-icons right">close</i></span>
+                            <p>This is the description for the event.</p>
+                            <a style="position: absolute; bottom: 10px; right: 10px;" data-target='addModal' class="edit btn-floating btn-large waves-effect waves-light"><i class="material-icons">edit</i></a>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+            <br>
+            <p style="display:block;" id="noEvents">No Events Planned...</p>-->
